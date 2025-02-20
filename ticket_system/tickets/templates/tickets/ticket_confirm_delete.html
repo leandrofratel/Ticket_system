@@ -1,0 +1,7 @@
+<h1>Excluir Ticket</h1>
+<p>Tem certeza que deseja excluir "{{ ticket.titulo }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim, excluir</button>
+</form>
+<a href="{% url 'ticket_list' %}">Cancelar</a>

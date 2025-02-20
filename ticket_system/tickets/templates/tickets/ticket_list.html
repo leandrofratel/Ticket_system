@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Gestão de Incidentes</h1>
+        <a href="{% url 'ticket_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus-circle mr-2"></i>Cadastrar Incidente
+        </a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead class="thead-light">
+                <tr>
+                    <th>Código Incidente</th>
+                    <th>Código SX</th>
+                    <th>Analista</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.codigo_incidente }}</td>
+                        <td>{{ ticket.codigo_sx }}</td>
+                        <td>{{ ticket.analista }}</td>
+                        <td>{{ ticket.status }}</td>
+                        <td>
+                            <a href="{% url 'ticket_update' ticket.pk %}" class="btn btn-sm btn-outline-primary mr-2">
+                                <i class="fas fa-edit"></i> Editar
+                            </a>
+                            <a href="{% url 'ticket_delete' ticket.pk %}" class="btn btn-sm btn-outline-danger">
+                                <i class="fas fa-trash-alt"></i> Excluir
+                            </a>
+                            <a href="{% url 'ticket_detail' ticket.pk %}" class="btn btn-info btn-sm">
+                                <i class="fas fa-trash-alt"></i> Visualizar
+                            </a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center">Nenhum ticket encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+{% endblock %}
+

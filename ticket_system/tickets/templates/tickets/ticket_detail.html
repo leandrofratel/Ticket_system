@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Detalhes do Incidente</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Número do Incidente: {{ ticket.codigo_incidente }}</h5>
+            <p class="card-text"><strong>Recurso:</strong> {{ ticket.recurso }}</p>
+            <p class="card-text"><strong>Problema Apresentado:</strong> {{ ticket.problema_apresentado }}</p>
+            <p class="card-text"><strong>Ações:</strong> {{ ticket.acoes }}</p>
+            <p class="card-text"><strong>Solução:</strong> {{ ticket.solucao }}</p>
+            <p class="card-text"><strong>Causa Raiz:</strong> {{ ticket.causa_raiz }}</p>
+            <p class="card-text"><strong>Link do Alerta:</strong> <a href="{{ ticket.link_alerta }}" target="_blank">{{ ticket.link_alerta }}</a></p>
+            <p class="card-text"><strong>Grupo de Suporte:</strong> {{ ticket.grupo_suporte }}</p>
+            <p class="card-text"><strong>Analista:</strong> {{ ticket.analista }}</p>
+            <p class="card-text"><strong>Status:</strong> {{ ticket.get_status_display }}</p>
+            {% if ticket.imagens %}
+                <p class="card-text"><strong>Imagem:</strong></p>
+                <img src="{{ ticket.imagens.url }}" alt="Imagem do Incidente" class="img-fluid">
+            {% else %}
+                <p class="card-text"><strong>Imagem:</strong> Nenhuma imagem enviada.</p>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{% url 'ticket_list' %}" class="btn btn-secondary mt-3">Voltar para a Lista</a>
+</div>
+{% endblock %}

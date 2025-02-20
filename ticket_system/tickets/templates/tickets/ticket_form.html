@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{% if form.instance.pk %}Editar{% else %}Novo{% endif %} Ticket</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.codigo_incidente|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.codigo_sx|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                {{ form.recurso|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{ form.responsavel|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.problema_apresentado|as_crispy_field }}
+        {{ form.acoes|as_crispy_field }}
+        {{ form.solucao|as_crispy_field }}
+        {{ form.causa_raiz|as_crispy_field }}
+        {{ form.link_alerta|as_crispy_field }}
+
+        <!-- Campo de Upload Multiplo de Imagens -->
+        <div class="form-group">
+            <label for="images">Imagens</label>
+            <input type="file" name="images" id="images" class="form-control" multiple>
+        </div>
+        <!-- Campo de Upload Multiplo de Imagens -->
+
+        <div class="row">
+            <div class="col-md-4">
+                {{ form.grupo_suporte|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ form.analista|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{ form.status|as_crispy_field }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <a href="{% url 'ticket_list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
